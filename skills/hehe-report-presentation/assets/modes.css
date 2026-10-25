@@ -1,0 +1,125 @@
+/* Components are independent of the canvas. The selected canvas reflows them. */
+#stage{width:var(--page-w);height:var(--page-h)}
+.cover .content h2,.back .content h2{color:#fff}
+.report-split{display:grid;gap:32px;align-items:start}.report-split>div{min-width:0}.report-split>div+div{border-left:1px solid var(--line);padding-left:28px}
+.report-finding{background:var(--pale);padding:24px 26px;border-left:4px solid var(--teal);margin:0 0 20px}.report-finding h2{font-size:20px}.report-finding p{font-size:18px;line-height:1.75}
+.report-flow{display:flex;gap:22px;margin:10px 0 20px}.flow-step{flex:1;min-width:0;padding:22px;background:var(--pale);position:relative}.step-number{display:block;font-size:27px;color:var(--teal);margin-bottom:16px}.flow-step:not(:last-child):after{content:'→';position:absolute;right:-20px;top:30px;color:var(--teal);font-size:22px}.flow-step h2{font-size:19px}.flow-step p{font-size:18px;line-height:1.75}
+.report-timeline{position:relative}.timeline-row{display:grid;grid-template-columns:155px 1fr;gap:28px;padding:18px 0;border-bottom:1px solid var(--line)}.timeline-row:last-child{border:0}.timeline-row .period{font-size:22px;color:var(--teal);font-weight:bold}.timeline-row h2{margin-bottom:8px}.timeline-row p{font-size:18px;line-height:1.7}
+.report-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-bottom:22px}.report-metrics>div{border-top:3px solid var(--teal);padding-top:16px}.metric-value{font-size:38px;line-height:1.3;color:var(--ink);display:block;margin-bottom:12px}.report-metrics p{font-size:17px}
+figure.report-chart{margin:0}.chart-heading{font-size:20px;font-weight:600;display:flex;justify-content:space-between;gap:20px;color:var(--ink)}.chart-heading>span{font-size:14px;font-weight:400;color:var(--muted)}.chart-legend{display:flex;gap:20px;margin:14px 0 0;font-size:14px}.chart-legend span{display:flex;align-items:center;gap:8px}.chart-legend i{width:12px;height:12px}.native-chart svg{width:100%;height:auto;display:block}figcaption{font-size:12px;color:var(--muted);line-height:1.6}
+/* Three reading styles; typography and hierarchy vary as well as color. */
+body[data-theme=editorial]{--ink:#25483f;--text:#303f39;--muted:#64736a;--blue:#507161;--teal:#947448;--pale:#f1f0e9;--line:#d9d9cd;--paper:#fcfbf7;background:#dedfd7}
+body[data-theme=editorial] h1{font-family:"SimSun","Songti SC",serif;font-weight:700;font-size:33px;letter-spacing:.4px}body[data-theme=editorial] .cover h1{font-size:48px}body[data-theme=editorial] .research-table th{background:#e2e8dc;color:var(--ink)}body[data-theme=editorial] .research-table tr:nth-child(even) td{background:#f2f2eb}body[data-theme=editorial] .panel,body[data-theme=editorial] .comparison-col{background:transparent;border-top:2px solid var(--teal)}
+body[data-theme=brief]{--ink:#193247;--blue:#385d78;--text:#263a47;--teal:#9b6e36;--pale:#eef2f5;--line:#cdd9e0}
+body[data-theme=brief] .slide.content{padding-top:26px}body[data-theme=brief] header{padding-left:18px;border-left:4px solid var(--teal)}body[data-theme=brief] h1{font-size:29px}body[data-theme=brief] .research-table th{background:#e0e9ef;color:var(--ink)}body[data-theme=brief] .cover header,body[data-theme=brief] .chapter header,body[data-theme=brief] .back header{border:0;padding-left:0}
+/* Portrait is composed vertically, not a scaled landscape page. */
+body[data-canvas="9:16"] .slide,body[data-canvas=A4] .slide{padding:34px 38px 52px}
+body[data-canvas="9:16"] footer,body[data-canvas=A4] footer{left:38px;right:38px}
+body[data-canvas="9:16"] h1,body[data-canvas=A4] h1{font-size:29px}
+body[data-canvas="9:16"] .content,body[data-canvas=A4] .content{font-size:18px;line-height:1.75}
+body[data-canvas="9:16"] .report-split,body[data-canvas=A4] .report-split,
+body[data-canvas="9:16"] .reading-columns,body[data-canvas=A4] .reading-columns,
+body[data-canvas="9:16"] .comparison,body[data-canvas=A4] .comparison,
+body[data-canvas="9:16"] .analysis-columns,body[data-canvas=A4] .analysis-columns,
+body[data-canvas="9:16"] .overview-grid,body[data-canvas=A4] .overview-grid{grid-template-columns:1fr!important;gap:22px}
+body[data-canvas="9:16"] .report-split>div+div,body[data-canvas=A4] .report-split>div+div,
+body[data-canvas="9:16"] .reading-columns>div+div,body[data-canvas=A4] .reading-columns>div+div{border-left:0;padding-left:0;padding-top:20px;border-top:1px solid var(--line)}
+body[data-canvas="9:16"] .scope-branches,body[data-canvas=A4] .scope-branches,
+body[data-canvas="9:16"] .technical-evidence,body[data-canvas=A4] .technical-evidence{grid-template-columns:1fr;gap:16px}
+body[data-canvas="9:16"] .scope-branches>div,body[data-canvas=A4] .scope-branches>div{padding:18px 22px}
+body[data-canvas="9:16"] .scope-branches h2,body[data-canvas=A4] .scope-branches h2{margin-bottom:8px}
+body[data-canvas="9:16"] .scope-summary,body[data-canvas=A4] .scope-summary,
+body[data-canvas="9:16"] .operating-review,body[data-canvas=A4] .operating-review,
+body[data-canvas="9:16"] .model-group,body[data-canvas=A4] .model-group{grid-template-columns:1fr;gap:16px}
+body[data-canvas="9:16"] .text-band,body[data-canvas=A4] .text-band{grid-template-columns:160px 1fr;gap:20px}
+body[data-canvas="9:16"] .role-grid,body[data-canvas=A4] .role-grid{grid-template-columns:1fr 1fr}
+body[data-canvas="9:16"] .interview-row,body[data-canvas=A4] .interview-row{grid-template-columns:1fr 100px;gap:12px}.interview-row>div:last-child{min-width:0}
+body[data-canvas="9:16"] .interview-row>div:last-child,body[data-canvas=A4] .interview-row>div:last-child{grid-column:1/-1}
+body[data-canvas="9:16"] .report-flow,body[data-canvas=A4] .report-flow{display:block}.flow-step p:last-child{margin:0}
+body[data-canvas="9:16"] .flow-step,body[data-canvas=A4] .flow-step{display:grid;grid-template-columns:46px 1fr;gap:12px;margin-bottom:16px}
+body[data-canvas="9:16"] .flow-step:after,body[data-canvas=A4] .flow-step:after{content:none}
+body[data-canvas="9:16"] .cover header,body[data-canvas=A4] .cover header{width:auto;margin-top:110px}
+body[data-canvas="9:16"] .cover h1,body[data-canvas=A4] .cover h1{font-size:40px;white-space:pre-line;margin-top:75px}
+body[data-canvas="9:16"] .cover .lead,body[data-canvas=A4] .cover .lead{font-size:22px}
+body[data-canvas="9:16"] .cover-art,body[data-canvas=A4] .cover-art{width:500px;height:500px;top:auto;bottom:50px;right:-150px;opacity:.12}
+body[data-canvas="9:16"] .chapter header,body[data-canvas=A4] .chapter header,
+body[data-canvas="9:16"] .back header,body[data-canvas=A4] .back header{margin:240px 0 0 0}
+body[data-canvas="9:16"] .chapter .content,body[data-canvas=A4] .chapter .content,
+body[data-canvas="9:16"] .back .content,body[data-canvas=A4] .back .content{margin:40px 0 0}
+body[data-canvas="9:16"] .chapter:before,body[data-canvas=A4] .chapter:before,
+body[data-canvas="9:16"] .back:before,body[data-canvas=A4] .back:before{width:100%;height:180px}
+body[data-canvas="9:16"] .chapter-mark,body[data-canvas=A4] .chapter-mark{left:0;top:-340px;font-size:100px}
+body[data-canvas="9:16"] .toc .grid.two,body[data-canvas=A4] .toc .grid.two{grid-template-columns:1fr;gap:12px}
+body[data-canvas="9:16"] .toc-link,body[data-canvas=A4] .toc-link{min-height:88px;padding:18px}
+body[data-canvas="9:16"] .history-grid,body[data-canvas=A4] .history-grid,body[data-canvas="9:16"] .delivery-grid,body[data-canvas=A4] .delivery-grid{grid-template-columns:1fr;gap:20px}
+body[data-canvas="9:16"] .overview-path,body[data-canvas=A4] .overview-path{display:flex;flex-wrap:wrap;gap:10px}
+body[data-canvas="9:16"] .overview-path>div,body[data-canvas=A4] .overview-path>div{flex:1 1 30%;white-space:nowrap;padding:12px 6px}
+body[data-canvas="9:16"] .overview-path>div:after,body[data-canvas=A4] .overview-path>div:after{content:none}
+body[data-canvas="9:16"] .formula,body[data-canvas=A4] .formula{font-size:19px;line-height:1.7}
+/* Scroll reports use the document flow and responsive modules. */
+body[data-canvas=scroll]{overflow:auto;height:auto;background:var(--paper)}
+body[data-canvas=scroll] #stage{position:static;transform:none;width:min(1100px,100%);height:auto;margin:0 auto}
+body[data-canvas=scroll] .slide{position:relative;inset:auto;visibility:visible;pointer-events:auto;height:auto;overflow:visible;padding:50px 56px 40px;border-bottom:1px solid var(--line);scroll-margin-top:20px}
+body[data-canvas=scroll] footer{position:static;margin-top:30px;font-size:11px}
+body[data-canvas=scroll] .cover header{width:auto;margin:30px 0 0}body[data-canvas=scroll] .cover .content{position:relative;margin-top:35px}
+body[data-canvas=scroll] .cover h1{margin-top:36px;font-size:42px}body[data-canvas=scroll] .cover-art{width:500px;height:500px;right:0;top:0;overflow:hidden}
+body[data-canvas=scroll] .chapter header,body[data-canvas=scroll] .back header{margin:0}body[data-canvas=scroll] .chapter .content,body[data-canvas=scroll] .back .content{margin:25px 0 0}
+body[data-canvas=scroll] .chapter:before,body[data-canvas=scroll] .back:before,body[data-canvas=scroll] .chapter-mark{display:none}
+body[data-canvas=scroll] #toolbar{position:sticky;bottom:0}body[data-canvas=scroll] .slide.toc .content{margin-top:20px}
+@media(max-width:700px){body[data-canvas=scroll] .slide{padding:30px 22px}body[data-canvas=scroll] h1{font-size:27px}body[data-canvas=scroll] .cover h1{font-size:33px}body[data-canvas=scroll] .content{font-size:17px}
+body[data-canvas=scroll] .report-split,body[data-canvas=scroll] .reading-columns,body[data-canvas=scroll] .analysis-columns,body[data-canvas=scroll] .overview-grid,body[data-canvas=scroll] .comparison,body[data-canvas=scroll] .scope-branches,body[data-canvas=scroll] .technical-evidence,body[data-canvas=scroll] .model-group,body[data-canvas=scroll] .scope-summary,body[data-canvas=scroll] .operating-review{grid-template-columns:1fr!important;gap:20px}
+body[data-canvas=scroll] .report-split>div+div,body[data-canvas=scroll] .reading-columns>div+div{border:0;padding:0}
+body[data-canvas=scroll] .report-flow{display:block}body[data-canvas=scroll] .flow-step{margin-bottom:18px}body[data-canvas=scroll] .flow-step:after{content:none}
+body[data-canvas=scroll] .text-band,body[data-canvas=scroll] .week,body[data-canvas=scroll] .timeline-row{grid-template-columns:1fr;gap:10px}
+body[data-canvas=scroll] .role-grid,body[data-canvas=scroll] .grid.two,body[data-canvas=scroll] .report-metrics{grid-template-columns:1fr}
+body[data-canvas=scroll] .interview-row{grid-template-columns:1fr 90px}body[data-canvas=scroll] .interview-row>div:last-child{grid-column:1/-1}
+body[data-canvas=scroll] .research-table{display:block;overflow-x:auto}body[data-canvas=scroll] .research-table th,body[data-canvas=scroll] .research-table td{min-width:130px}
+body[data-canvas=scroll] #pages{max-width:150px}#toolbar{gap:6px}#fullscreen{display:none}}
+@media print{
+ #stage{width:var(--page-w);height:auto}.slide{width:var(--page-w);height:var(--page-h)}
+ body[data-canvas=scroll] #stage{width:100%;margin:0}
+ body[data-canvas=scroll] .slide{width:auto;height:auto;padding:18px 0;break-after:auto;page-break-after:auto;border-bottom:1px solid var(--line)}
+ body[data-canvas=scroll] .cover{padding:35px 28px;break-after:page}
+ body[data-canvas=scroll] .cover-art{display:none}
+ body[data-canvas=scroll] .chapter{break-before:page;break-after:avoid;padding:24px}
+ body[data-canvas=scroll] .back{break-before:page;padding:30px}
+ body[data-canvas=scroll] header{break-after:avoid}
+ body[data-canvas=scroll] footer{display:none}
+ body[data-canvas=scroll] h1{font-size:25px}body[data-canvas=scroll] .content{font-size:16px;line-height:1.7}
+ body[data-canvas=scroll] .report-split,body[data-canvas=scroll] .reading-columns,body[data-canvas=scroll] .analysis-columns,body[data-canvas=scroll] .comparison,body[data-canvas=scroll] .scope-branches,body[data-canvas=scroll] .technical-evidence,body[data-canvas=scroll] .model-group,body[data-canvas=scroll] .overview-grid{display:block}
+ body[data-canvas=scroll] .report-split>div,body[data-canvas=scroll] .reading-columns>div,body[data-canvas=scroll] .analysis-columns>div,body[data-canvas=scroll] .comparison>div,body[data-canvas=scroll] .scope-branches>div,body[data-canvas=scroll] .technical-evidence>div,body[data-canvas=scroll] .overview-grid>div{margin-bottom:20px;padding:16px;border:0;break-inside:avoid}
+ body[data-canvas=scroll] .overview-path{break-inside:avoid;break-after:avoid}
+ body[data-canvas=scroll] figure,body[data-canvas=scroll] .flow-step,body[data-canvas=scroll] .timeline-row,body[data-canvas=scroll] .report-finding,body[data-canvas=scroll] .week,body[data-canvas=scroll] .role{break-inside:avoid}
+ body[data-canvas=scroll] .research-table{font-size:14px;display:table;overflow:visible}body[data-canvas=scroll] .research-table td{padding:8px}
+ thead{display:table-header-group}tr{break-inside:avoid}p{orphans:3;widows:3}h2,h3{break-after:avoid}
+}
+
+/* Blue 16:9 cover and chapter design. Full source example: cover_chapter.json. */
+body[data-canvas="16:9"][data-theme="blue"] .slide:is(.cover,.chapter){padding:30px 48px 48px;--ink:#123c52;--blue:#28677e}
+body[data-canvas="16:9"][data-theme="blue"] :is(.cover,.chapter) .eyebrow{letter-spacing:1px;font-size:12px;font-weight:500}
+body[data-canvas="16:9"][data-theme="blue"] :is(.cover,.chapter) .eyebrow>span:last-child{border-bottom:2px solid #248a91;padding-bottom:4px;min-width:24px;text-align:center}
+body[data-canvas="16:9"][data-theme="blue"] :is(.cover,.chapter) footer{padding-top:7px;bottom:15px;font-size:10.5px;border-top:1px solid #416778}
+body[data-canvas="16:9"][data-theme="blue"] .cover{background:#123c52}
+body[data-canvas="16:9"][data-theme="blue"] .cover:before{content:"";position:absolute;right:0;top:0;width:375px;height:100%;background:#174a60}
+body[data-canvas="16:9"][data-theme="blue"] .cover header{margin-top:35px;width:1000px}
+body[data-canvas="16:9"][data-theme="blue"] .cover h1{font-size:43px;line-height:1.45;margin:67px 0 24px;width:950px;max-width:950px;letter-spacing:0;text-wrap:initial}
+body[data-canvas="16:9"][data-theme="blue"] .cover .lead{max-width:850px;font-size:22px;color:#d6e6eb;line-height:1.65;text-wrap:pretty}
+body[data-canvas="16:9"][data-theme="blue"] .cover-art{width:520px;height:560px;right:-50px;top:125px;opacity:.32}
+body[data-canvas="16:9"][data-theme="blue"] .cover .content{margin-top:45px}
+body[data-canvas="16:9"][data-theme="blue"] .cover-meta{position:relative;z-index:2}
+body[data-canvas="16:9"][data-theme="blue"] .cover-fields{display:flex;gap:0;position:relative;margin-top:28px;max-width:650px;border-top:1px solid #427589;padding-top:17px;color:#bfd6df;font-size:17px}
+body[data-canvas="16:9"][data-theme="blue"] .cover-fields>span{flex:1;border-left:2px solid #4d969f;padding-left:14px}
+body[data-canvas="16:9"][data-theme="blue"] .chapter{background:#f3f7f9;color:#123c52}
+body[data-canvas="16:9"][data-theme="blue"] .chapter:before{width:235px;background:#123c52}
+body[data-canvas="16:9"][data-theme="blue"] .chapter header{margin:130px 0 0 260px}
+body[data-canvas="16:9"][data-theme="blue"] .chapter h1{font-size:35px;line-height:1.4;color:#123c52;max-width:880px;margin:22px 0;letter-spacing:0;text-wrap:balance}
+body[data-canvas="16:9"][data-theme="blue"] .chapter .eyebrow{color:#28677e}
+body[data-canvas="16:9"][data-theme="blue"] .chapter .lead{color:#536c79;font-size:21px;max-width:780px;line-height:1.65;text-wrap:pretty}
+body[data-canvas="16:9"][data-theme="blue"] .chapter .content{margin:44px 0 0 260px}
+body[data-canvas="16:9"][data-theme="blue"] .chapter-mark{left:-276px;top:-216px;color:#94c6ce;font-size:105px;letter-spacing:-5px}
+body[data-canvas="16:9"][data-theme="blue"] .chapter .chapter-route{gap:28px}
+body[data-canvas="16:9"][data-theme="blue"] .chapter .chapter-route>span{color:#123c52;border-top:3px solid #81b1be;padding-top:20px;font-size:18px}
+body[data-canvas="16:9"][data-theme="blue"] .chapter footer{color:#617682;left:272px;border-color:#d0e0e6}
+body[data-canvas="16:9"][data-theme="blue"] .chapter-circuit{display:flex;gap:30px;position:absolute;left:-259px;top:115px}
+body[data-canvas="16:9"][data-theme="blue"] .chapter-circuit i{width:13px;height:13px;border:1px solid #75b0bd;position:relative}
+body[data-canvas="16:9"][data-theme="blue"] .chapter-circuit i+i:before{content:"";position:absolute;width:30px;height:1px;background:#75b0bd;left:-31px;top:5px}

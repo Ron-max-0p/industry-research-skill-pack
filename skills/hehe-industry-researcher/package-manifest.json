@@ -3,7 +3,7 @@
   "profile": "hehe-industry-researcher-public-full",
   "entry_skill": "hehe-industry-researcher",
   "install_policy": "full-bundle",
-  "install_policy_notes": "作为完整行业或企业研究总入口发布时，entry_skill 与 13 个 required_specialty_skills 必须一同安装；任一专项 Skill 都可由用户直接调用，不因总入口已安装而重新路由。部分安装只能交付已具备专项或有限范围研究，不得称为完整行业或企业研究。研究辅助能力均为可选增强，不是启动条件。",
+  "install_policy_notes": "完整组合提供 entry_skill 与 13 个 required_specialty_skills，并捆绑两个可选增强 bundled_delivery_skills；捆绑不等于运行依赖，单装专项无需配装。应调用的研究专项缺失时按实际覆盖交付有限范围研究；仅缺少交付增强 Skill 不影响研究、定稿或报告完整性。hehe-report-writing 安装后默认润色，未安装时沿用原流程。综合报告默认有 HTML：有 hehe-report-presentation、无 hehe-report-writing 时直接由 Markdown 生成带侧栏目录的下拉 HTML；两者都有时主动提供呈现形式并询问选择；无 hehe-report-presentation 时使用随包基础侧栏 HTML。单独专项安装了 hehe-report-presentation 后主动询问是否增加视觉报告，无 hehe-report-writing 时提供下拉 HTML，两者都有时提供各呈现形式；用户拒绝或未安装呈现 Skill 时保留原交付。两项增强 Skill 可独立发布，与组合包从同一维护源导出、同步版本，同名 Skill 只安装一份。",
   "required_specialty_skills": [
     {
       "name": "hehe-market-sizing",
@@ -58,12 +58,24 @@
       "suite_path": "skills/hehe-valuation-analysis"
     }
   ],
+  "bundled_delivery_skills": [
+    {
+      "name": "hehe-report-writing",
+      "suite_path": "skills/hehe-report-writing",
+      "use": "可选安装；安装后默认润色；分页编排仅在选择分页报告时使用"
+    },
+    {
+      "name": "hehe-report-presentation",
+      "suite_path": "skills/hehe-report-presentation",
+      "use": "可选安装；综合报告默认 HTML，单独专项主动询问是否增加 HTML／PPT"
+    }
+  ],
   "optional_capability_types": [
     "网页搜索或浏览",
     "公开信息采集",
     "搜索或数据 MCP/API",
     "PDF、Office、网页正文或 OCR 解析",
-    "材料审核、报告写作或交付质检",
+    "材料审核或交付质检",
     "电子表格生成与公式重算"
   ],
   "shared_public_files": [],

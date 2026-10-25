@@ -23,6 +23,7 @@ PRIVATE_PATTERNS = {
 }
 LINK_RE = re.compile(r"!?\[[^\]]*\]\(([^)]+)\)")
 NAME_RE = re.compile(r"(?m)^name:\s*([^\s]+)\s*$")
+SKILL_REF_RE = re.compile(r"(?<![A-Za-z0-9-])hehe-[a-z0-9]+(?:-[a-z0-9]+)*(?![A-Za-z0-9-])")
 
 
 def read_text(path: Path) -> str:
@@ -74,14 +75,37 @@ def main() -> int:
         name: re.compile(rf"(?<![A-Za-z0-9-]){re.escape(manifest.get('namespace', 'hehe-') + name)}(?![A-Za-z0-9-])")
         for name in name_exceptions if isinstance(name, str)
     }
-    if manifest.get("display_name") != "盒盒行业研究技能包":
+    profile = manifest.get("profile", "research-bundle")
+    if profile not in {"research-bundle", "standalone-delivery"}:
+        errors.append(f"unknown release profile: {profile}")
+    standalone = profile == "standalone-delivery"
+    if not standalone and manifest.get("display_name") != "盒盒行业研究技能包":
         errors.append("release display_name is not 盒盒行业研究技能包")
-    if len(names) != 14 or len(set(names)) != 14:
-        errors.append(f"release manifest must contain 14 unique skills, found {len(names)}")
+    expected_count = 1 if standalone else 16
+    if len(names) != expected_count or len(set(names)) != expected_count:
+        errors.append(f"release manifest must contain {expected_count} unique skills, found {len(names)}")
+    roles = {role: [item.get("name") for item in skills if item.get("role") == role]
+             for role in ("router", "specialty", "delivery")}
+    expected_roles = (0, 0, 1) if standalone else (1, 13, 2)
+    if tuple(len(roles[role]) for role in roles) != expected_roles:
+        errors.append(f"invalid role counts: expected router/specialty/delivery={expected_roles}")
+    deliveries = {"hehe-report-writing", "hehe-report-presentation"}
+    if (standalone and not set(names) <= deliveries) or (not standalone and set(roles['delivery']) != deliveries):
+        errors.append("delivery Skill names do not match the release profile")
     if any(not isinstance(name, str) or not name.startswith("hehe-") for name in names):
         errors.append("every released skill name must start with hehe-")
 
     skills_root = repo / "skills"
+    optional_external = manifest.get("optional_external_skills", {})
+    if not isinstance(optional_external, dict):
+        errors.append("optional_external_skills must map names to optional-use explanations")
+        optional_external = {}
+    for name, reason in optional_external.items():
+        if not SKILL_REF_RE.fullmatch(name) or name in names or not isinstance(reason, str) or not reason.strip():
+            errors.append(f"invalid optional external Skill declaration: {name}")
+    for md in skills_root.rglob("*.md"):
+        for reference in sorted(set(SKILL_REF_RE.findall(read_text(md))) - set(names) - set(optional_external)):
+            errors.append(f"undeclared external Skill reference: {md.relative_to(repo)} -> {reference}")
     actual_dirs = sorted(p.name for p in skills_root.iterdir() if p.is_dir())
     if sorted(names) != actual_dirs:
         errors.append(f"skills directory mismatch: expected {sorted(names)}, found {actual_dirs}")
@@ -98,13 +122,24 @@ def main() -> int:
             errors.append(f"frontmatter name mismatch: {name} -> {actual_name}")
         check_markdown_links(skill_dir, errors)
 
+    for item in skills:
+        skill_dir = skills_root / item["name"]
+        required_files = item.get("required_files", [])
+        if not required_files or "SKILL.md" not in required_files:
+            errors.append(f"missing required_files inventory: {item['name']}")
+        for relative in required_files:
+            resolved = (skill_dir / relative).resolve()
+            if not resolved.is_relative_to(skill_dir.resolve()) or not resolved.is_file():
+                errors.append(f"missing or invalid runtime file: {item['name']}/{relative}")
+
     for path in repo.rglob("*"):
         rel = path.relative_to(repo)
         if any(part in FORBIDDEN_PATH_PARTS for part in rel.parts):
             errors.append(f"forbidden path: {rel}")
         if path.is_file() and (path.suffix.lower() == ".pyc" or "_CO" in path.name):
             errors.append(f"forbidden generated file: {rel}")
-        if path.is_file() and path.suffix.lower() in TEXT_SUFFIXES and path.resolve() != Path(__file__).resolve():
+        if (path.is_file() and path.suffix.lower() in TEXT_SUFFIXES
+                and path.resolve() not in {Path(__file__).resolve(), repo / "scripts" / "validate_release.py"}):
             text = read_text(path)
             for label, pattern in PRIVATE_PATTERNS.items():
                 if pattern.search(text):
@@ -114,26 +149,31 @@ def main() -> int:
                     errors.append(f"incorrectly prefixed name ({name}): {rel}")
 
     entry = manifest.get("entry_skill")
-    if entry != "hehe-industry-researcher":
+    if (not standalone and entry != "hehe-industry-researcher") or (standalone and entry not in names):
         errors.append(f"unexpected entry_skill: {entry}")
     router_manifest_path = skills_root / entry / "package-manifest.json"
-    if not router_manifest_path.is_file():
+    if not standalone and not router_manifest_path.is_file():
         errors.append("missing router package-manifest.json")
-    else:
+    elif not standalone:
         router_manifest = json.loads(read_text(router_manifest_path))
         required = router_manifest.get("required_specialty_skills", [])
         required_names = [item.get("name") for item in required]
-        expected_specialty = [name for name in names if name != entry]
+        expected_specialty = roles["specialty"]
         if router_manifest.get("install_policy") != "full-bundle":
             errors.append("router install_policy must be full-bundle")
         if router_manifest.get("entry_skill") != entry:
             errors.append("router entry_skill does not use public name")
         if sorted(required_names) != sorted(expected_specialty):
             errors.append("router required_specialty_skills does not match the 13 public specialty skills")
+        bundled = router_manifest.get("bundled_delivery_skills", [])
+        if sorted(item.get("name", "") for item in bundled) != sorted(roles["delivery"]):
+            errors.append("router bundled_delivery_skills does not match the two delivery Skills")
+        for item in required + bundled:
+            expected = f"skills/{item.get('name')}"
+            if item.get("suite_path") != expected or not (repo / expected / "SKILL.md").is_file():
+                errors.append(f"invalid bundled Skill path: {item.get('name')} -> {item.get('suite_path')}")
 
-    for name in names:
-        if name == entry:
-            continue
+    for name in roles["specialty"]:
         templates = list((skills_root / name).rglob("*交付模板.md"))
         if len(templates) != 1:
             errors.append(f"{name} must contain exactly one delivery template, found {len(templates)}")
@@ -155,7 +195,7 @@ def main() -> int:
         return 1
 
     print(f"Validated {len(names)} public Skills for {manifest['display_name']}.")
-    print("Names, bundle contract, links, delivery templates, and public-package hygiene passed.")
+    print("Names, bundle contract, Skill references, links, delivery templates, and public-package hygiene passed.")
     return 0
 
 

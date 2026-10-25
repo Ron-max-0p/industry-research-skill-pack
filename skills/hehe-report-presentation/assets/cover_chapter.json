@@ -1,0 +1,27 @@
+{
+  "title": "蓝白商业报告封面与章节页示范",
+  "footer": "蓝白16:9 · 封面与章节页示范",
+  "canvas": "16:9",
+  "theme": "blue",
+  "pdf_file": "20261023_封面章节样式_CO.pdf",
+  "slides": [
+    {
+      "kind": "cover",
+      "section": "研究项目建议书",
+      "title": "传感器企业\n商业尽职调查研究计划书",
+      "lead": "从应用市场、产品能力和经营基础出发，评估目标企业的发展机会与投资价值。",
+      "body": "<div class=\"cover-art\"><svg fill=\"none\" stroke=\"#8dc4ce\" stroke-width=\"2\" viewbox=\"0 0 600 650\"><rect height=\"180\" rx=\"12\" width=\"180\" x=\"180\" y=\"235\"></rect><rect height=\"120\" rx=\"3\" width=\"120\" x=\"210\" y=\"265\"></rect><path d=\"M200 235V105H80M250 235V50h240M300 235V145h160M360 280h140V100M360 330h170v170M360 380h90v190M300 415v150H120M250 415v190H40M180 275H80V210M180 325H35v160M180 375H110v180\"></path><circle cx=\"80\" cy=\"105\" r=\"15\"></circle><circle cx=\"490\" cy=\"50\" r=\"15\"></circle><circle cx=\"460\" cy=\"145\" r=\"15\"></circle><circle cx=\"500\" cy=\"100\" r=\"15\"></circle><circle cx=\"530\" cy=\"500\" r=\"15\"></circle><circle cx=\"450\" cy=\"570\" r=\"15\"></circle><circle cx=\"120\" cy=\"565\" r=\"15\"></circle><circle cx=\"40\" cy=\"605\" r=\"15\"></circle><circle cx=\"80\" cy=\"210\" r=\"15\"></circle><circle cx=\"35\" cy=\"485\" r=\"15\"></circle><circle cx=\"110\" cy=\"555\" r=\"15\"></circle></svg></div><div class=\"cover-meta\"><span>委托对象｜投资研究团队</span><span>日期｜2026年10月23日</span></div><div class=\"cover-rule\"></div><div class=\"cover-note\">版式示范 · 内容按实际研究项目填写</div><div class=\"cover-note\">研究范围与交付安排按委托确定</div><div class=\"cover-fields\"><span>应用市场</span><span>技术与经营</span><span>投资价值</span></div>",
+      "purpose": "封面与章节页的完整排版示范",
+      "layout": "项目识别与芯片线形图"
+    },
+    {
+      "kind": "chapter",
+      "section": "第1章",
+      "title": "行业需求与竞争格局",
+      "lead": "从下游需求和客户采购条件出发，识别目标企业能够参与的市场及其竞争位置。",
+      "body": "<div class=\"chapter-mark\">01</div><div class=\"chapter-route\"><span>下游需求与市场空间</span><span>客户采购与替代方案</span><span>目标企业竞争位置</span></div><div aria-hidden=\"true\" class=\"chapter-circuit\"><i></i><i></i><i></i></div>",
+      "purpose": "封面与章节页的完整排版示范",
+      "layout": "章节编号与研究任务路径"
+    }
+  ]
+}

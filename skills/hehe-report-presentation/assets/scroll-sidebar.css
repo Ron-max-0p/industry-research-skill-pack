@@ -1,0 +1,56 @@
+/* Only included for scrolling reports; fixed-canvas layouts are unchanged. */
+html:has(body[data-canvas=scroll]){height:auto;overflow:auto}
+body[data-canvas=scroll]{background:#edf2f5;padding-left:260px;padding-bottom:44px}
+body[data-canvas=scroll] #stage{max-width:1040px;width:100%;margin:0 auto;background:var(--paper)}
+body[data-canvas=scroll] .slide{padding:38px 48px 24px;scroll-margin-top:18px}
+body[data-canvas=scroll] .slide>header{border-bottom:1px solid var(--line);padding-bottom:18px}
+body[data-canvas=scroll] .slide>header h1{font-size:28px;line-height:1.5;scroll-margin-top:24px}
+body[data-canvas=scroll] .slide:first-child>header h1{font-size:34px}
+body[data-canvas=scroll] .content{font-size:17px;line-height:1.85;overflow-wrap:anywhere}
+body[data-canvas=scroll] .content h2,body[data-canvas=scroll] .content h3{margin:26px 0 14px;scroll-margin-top:24px}
+body[data-canvas=scroll] .eyebrow:has(.chapter-name:empty),body[data-canvas=scroll] .lead:empty{display:none}
+body[data-canvas=scroll] .slide>footer{min-height:20px}
+body[data-canvas=scroll] .slide>footer span:last-child{display:none}
+body[data-canvas=scroll] img{max-width:100%;height:auto}
+body[data-canvas=scroll] blockquote{border-left:4px solid var(--teal);background:var(--pale);padding:18px 22px;margin:24px 0}
+body[data-canvas=scroll] pre{white-space:pre-wrap;overflow-wrap:anywhere;background:var(--pale);padding:18px;font-size:14px}
+body[data-canvas=scroll] .table-scroll{overflow-x:auto;margin:22px 0}
+body[data-canvas=scroll] .research-table{font-size:15px;line-height:1.7;table-layout:auto}
+body[data-canvas=scroll] #toolbar{left:260px;position:fixed;font-size:12px}
+body[data-canvas=scroll] #toolbar #contents{display:none}
+#report-sidebar{position:fixed;left:0;top:0;bottom:0;width:260px;background:var(--ink);color:#e6eff3;padding:30px 18px;overflow-y:auto;z-index:30}
+.sidebar-brand{font-size:11px;letter-spacing:3px;color:#adc4d0;margin:0 12px 16px}
+.sidebar-title{font-size:19px;font-weight:700;line-height:1.6;margin:0 12px 24px;padding-bottom:22px;border-bottom:1px solid #ffffff30;overflow-wrap:anywhere}
+#report-toc a{display:block;color:#c6d8e2;text-decoration:none;font-size:13px;line-height:1.6;padding:10px 12px;border-radius:4px;border-left:3px solid transparent;overflow-wrap:anywhere;margin:3px 0}
+#report-toc a[data-depth="2"]{padding-left:24px;font-size:12px}
+#report-toc a[data-depth="3"]{padding-left:34px;font-size:12px}
+#report-toc a:hover,#report-toc a:focus-visible{background:#ffffff12;color:#fff}
+#report-toc a[aria-current="location"]{background:#ffffff18;color:#fff;border-left-color:#6fc4cb;font-weight:700}
+#toc-toggle{display:none}
+@media(max-width:900px){
+ body[data-canvas=scroll]{padding-left:0;padding-top:52px}
+ body[data-canvas=scroll] #toolbar{left:0;gap:6px}
+ #report-sidebar{display:none;top:52px;width:min(320px,90vw);box-shadow:8px 0 24px #102e4140}
+ #report-sidebar.open{display:block}
+ #toc-toggle{display:block;position:fixed;top:10px;left:16px;background:var(--ink);color:#fff;padding:6px 18px;z-index:40;font-size:14px}
+ body[data-canvas=scroll] .slide{padding:28px 24px 20px;scroll-margin-top:62px}
+ body[data-canvas=scroll] .slide:first-child>header h1{font-size:28px}
+ body[data-canvas=scroll] .slide>header h1{font-size:25px;scroll-margin-top:62px}
+ body[data-canvas=scroll] .content{font-size:16px}
+ body[data-canvas=scroll] .research-table{display:table}
+ body[data-canvas=scroll] .content h2,body[data-canvas=scroll] .content h3{scroll-margin-top:62px}
+}
+@media print{
+ html:has(body[data-canvas=scroll]){overflow:visible}
+ body[data-canvas=scroll]{padding:0;background:white}
+ #report-sidebar,#toc-toggle,body[data-canvas=scroll] #toolbar{display:none!important}
+ body[data-canvas=scroll] #stage{max-width:none;width:100%;margin:0}
+ body[data-canvas=scroll] .slide{padding:12px 0;break-after:auto}
+ body[data-canvas=scroll] .slide>header{break-after:avoid}
+ body[data-canvas=scroll] .content{font-size:11pt;line-height:1.65}
+ body[data-canvas=scroll] .table-scroll{overflow:visible}
+ body[data-canvas=scroll] .research-table{width:100%;font-size:9pt;table-layout:fixed}
+ body[data-canvas=scroll] .research-table th,body[data-canvas=scroll] .research-table td{min-width:0;overflow-wrap:anywhere;padding:6px}
+ body[data-canvas=scroll] thead{display:table-header-group}
+ body[data-canvas=scroll] tr,body[data-canvas=scroll] img{break-inside:avoid}
+}

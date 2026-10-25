@@ -1,0 +1,4 @@
+interface:
+  display_name: "专业报告写作与编辑"
+  short_description: "专业文稿写作、编辑及行业、企业、用户与综合报告的逐页编排"
+  default_prompt: "使用 $hehe-report-writing 按我的要求写作、编辑或分页编排已有材料，展开已有分析逻辑，保留关键事实、来源和有效条件，去掉含糊用语与无效自辩。需要PPT或分页HTML脚本时读取分页模块，已有成熟正文直接编排。"

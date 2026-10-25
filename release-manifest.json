@@ -1,66 +1,242 @@
 {
   "schema_version": 1,
+  "profile": "research-bundle",
   "display_name": "盒盒行业研究技能包",
   "repository_slug": "hehe-industry-research-skill-pack",
-  "version": "2026.10.07-rc8",
+  "version": "2026.10.25",
   "namespace": "hehe-",
   "entry_skill": "hehe-industry-researcher",
   "skills": [
     {
       "name": "hehe-industry-researcher",
-      "role": "router"
+      "role": "router",
+      "required_files": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/研究报告HTML模板.html",
+        "package-manifest.json",
+        "references/HTML报告交付规范.md",
+        "references/专项分析与交付流程.md",
+        "references/信息搜索流程.md",
+        "references/分析准备流程.md",
+        "references/最终交付流程.md",
+        "references/研究Skill职能结构.md",
+        "references/研究开题流程.md",
+        "references/研究项目目录模板.md",
+        "references/简单开题模板.md",
+        "scripts/build-html-report.py",
+        "scripts/validate-bundle.ps1"
+      ]
     },
     {
       "name": "hehe-market-sizing",
-      "role": "specialty"
+      "role": "specialty",
+      "required_files": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "references/专项工作流程.md",
+        "references/宏观与行业统计测算底数.md",
+        "references/市场机会与口径术语.md",
+        "references/市场规模测算交付模板.md",
+        "references/测算参考示例.md",
+        "references/测算方法详解.md"
+      ]
     },
     {
       "name": "hehe-industry-chain-map",
-      "role": "specialty"
+      "role": "specialty",
+      "required_files": [
+        "SKILL.md",
+        "assets/产业链图模板.json",
+        "references/专项工作流程.md",
+        "references/产业链分析交付模板.md",
+        "references/产业链图绘制规范.md",
+        "scripts/render_chain.py",
+        "tests/test_render_chain.py"
+      ]
     },
     {
       "name": "hehe-business-model",
-      "role": "specialty"
+      "role": "specialty",
+      "required_files": [
+        "SKILL.md",
+        "references/专项工作流程.md",
+        "references/商业模式分析交付模板.md",
+        "references/商业模式核心分析方法.md",
+        "references/商业模式计算方法与算例.md"
+      ]
     },
     {
       "name": "hehe-competitive-landscape",
-      "role": "specialty"
+      "role": "specialty",
+      "required_files": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "references/专项工作流程.md",
+        "references/竞争定位图与能力矩阵.md",
+        "references/竞争格局分析交付模板.md"
+      ]
     },
     {
       "name": "hehe-pest-analysis",
-      "role": "specialty"
+      "role": "specialty",
+      "required_files": [
+        "SKILL.md",
+        "references/E_经济环境分析方法.md",
+        "references/PEST外部环境分析交付模板.md",
+        "references/P_政策与监管分析方法.md",
+        "references/S_社会环境分析方法.md",
+        "references/T_技术环境分析方法.md",
+        "references/专项工作流程.md"
+      ]
     },
     {
       "name": "hehe-trend-analysis",
-      "role": "specialty"
+      "role": "specialty",
+      "required_files": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "references/专项工作流程.md",
+        "references/趋势分析交付模板.md"
+      ]
     },
     {
       "name": "hehe-industry-drivers",
-      "role": "specialty"
+      "role": "specialty",
+      "required_files": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "references/专项工作流程.md",
+        "references/行业结果拆解与量化归因方法.md",
+        "references/行业驱动力分析交付模板.md",
+        "references/行业驱动力分析工作表.md"
+      ]
     },
     {
       "name": "hehe-industry-pain-points",
-      "role": "specialty"
+      "role": "specialty",
+      "required_files": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "references/专项工作流程.md",
+        "references/行业痛点分析交付模板.md",
+        "references/行业痛点分析工作表.md"
+      ]
     },
     {
       "name": "hehe-company-profile",
-      "role": "specialty"
+      "role": "specialty",
+      "required_files": [
+        "SKILL.md",
+        "references/专项工作流程.md",
+        "references/公司底座与财务画像.md",
+        "references/公司画像交付模板.md"
+      ]
     },
     {
       "name": "hehe-financial-analysis",
-      "role": "specialty"
+      "role": "specialty",
+      "required_files": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "references/三表重构与预测模型.md",
+        "references/专项工作流程.md",
+        "references/企业财务诊断方法.md",
+        "references/会计质量与异常核查.md",
+        "references/无完整财报企业的财务分析.md",
+        "references/行业财务口径适配.md",
+        "references/财务分析交付模板.md",
+        "references/财务口径、公式与工作底表.md"
+      ]
     },
     {
       "name": "hehe-governance-capital-allocation",
-      "role": "specialty"
+      "role": "specialty",
+      "required_files": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "references/专项工作流程.md",
+        "references/治理与资本配置分析交付模板.md",
+        "references/治理与资本配置分析底表.md"
+      ]
     },
     {
       "name": "hehe-valuation-analysis",
-      "role": "specialty"
+      "role": "specialty",
+      "required_files": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "references/专项工作流程.md",
+        "references/估值分析交付模板.md",
+        "references/估值方法、公式与工作底表.md",
+        "references/非上市企业商业尽调估值.md"
+      ]
     },
     {
       "name": "hehe-investment-logic",
-      "role": "specialty"
+      "role": "specialty",
+      "required_files": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "references/专项工作流程.md",
+        "references/五类研究对象分析模式.md",
+        "references/投资方式与交易路径.md",
+        "references/投资逻辑交付模板.md",
+        "references/投资逻辑分析方法.md"
+      ]
+    },
+    {
+      "name": "hehe-report-writing",
+      "role": "delivery",
+      "required_files": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "references/专业编辑方法.md",
+        "references/分页编排/company.md",
+        "references/分页编排/industry.md",
+        "references/分页编排/integrated.md",
+        "references/分页编排/page-script-schema.md",
+        "references/分页编排/user.md",
+        "references/分页编排/分页与内容交接.md",
+        "references/分页编排与交付.md",
+        "references/句子与段落编辑.md",
+        "references/商业文稿成文与页面叙事.md",
+        "references/改写示例.md",
+        "references/文本报告独立撰写.md",
+        "references/研究报告编辑.md",
+        "references/计划书编辑.md"
+      ]
+    },
+    {
+      "name": "hehe-report-presentation",
+      "role": "delivery",
+      "required_files": [
+        "SKILL.md",
+        "agents/openai.yaml",
+        "assets/business.css",
+        "assets/business_layouts.json",
+        "assets/cover_chapter.json",
+        "assets/example.json",
+        "assets/modes.css",
+        "assets/report.html",
+        "assets/scroll-sidebar.css",
+        "assets/scroll-sidebar.js",
+        "references/HTML制作与核验.md",
+        "references/可编辑PPT交付.md",
+        "references/商业报告视觉编排.md",
+        "references/图形优先与生成检查.md",
+        "references/多形态交付.md",
+        "references/版式与组件选用.md",
+        "scripts/business_components.py",
+        "scripts/components.py",
+        "scripts/export_and_check.py",
+        "scripts/export_pptx.py",
+        "scripts/markdown_source.py",
+        "scripts/render_report.py",
+        "scripts/test_visual_plan.py",
+        "scripts/visual_plan.py",
+        "依赖清单.md"
+      ]
     }
   ],
   "name_exceptions": [
@@ -69,12 +245,15 @@
     "sou-cha-ling",
     "baojie"
   ],
+  "optional_external_skills": {
+    "hehe-research-delivery-qc": "仅在本机已安装时用于交付检查；未安装时由总入口自检，不要求公开用户安装。"
+  },
   "source_skill_sha256": {
-    "hehe-industry-researcher": "379d38a28eab4d4c78de87e959efc12762be77a5a57b88e0dbce5b673d6466ed",
+    "hehe-industry-researcher": "f4c3300dc8a231c424897c766b35471f5594a00effc3ea1b61f185e4fa960c7d",
     "hehe-market-sizing": "2ef339d0dc1d8bf2ede5cc65611c19178e17c664ae00bff377ca2048200473e8",
     "hehe-industry-chain-map": "2d45d077fac0d9d1325fd37f7e5dff75c3e4fae60c4914e739232ca3b294dbfa",
     "hehe-business-model": "abb6075abcd696375c937c75b5bcb85dac19105db8406bfe385c5de6fb64abd1",
-    "hehe-competitive-landscape": "a87d1663bb4e4cf035b185dce8ae093f49b69b1a185a80d650160f0ce8f2d9a2",
+    "hehe-competitive-landscape": "23c33fa26883b3063233c57ab6ea82e098c23fb93fd147192d4dea8363f7f1da",
     "hehe-pest-analysis": "d4ee3633325ea5e511b9a8a86bd65de1953ff9bc13dd867e7032c5c3d54a660d",
     "hehe-trend-analysis": "1c65fcd69c6685b242cfbbaaf0415f36f6062eb9bad4375aa3ee1b491ced963f",
     "hehe-industry-drivers": "0dfcad39b22a31ec06a113dcb32d2a82ca0538d1f56f1f7e7bf2bfc0c5704125",
@@ -83,7 +262,9 @@
     "hehe-financial-analysis": "81019baa28121813507608b1a29505985dc711b011eab132b41282730380a664",
     "hehe-governance-capital-allocation": "d728663fbb839a66cb0885b1eb1019625bbb3801f0ca8aa773200b57a7f7780f",
     "hehe-valuation-analysis": "9573432ec41d8b002d70013cb77c7d6468f3b1b1c0886e578e15e09357e9ec67",
-    "hehe-investment-logic": "36548771fde96b774e4785d4f15b5e98379d3fb6310b1396e6c486465cf3696d"
+    "hehe-investment-logic": "36548771fde96b774e4785d4f15b5e98379d3fb6310b1396e6c486465cf3696d",
+    "hehe-report-writing": "534d067c6166f8b4ba81281c6083fed5bb5439a01f867bc266b88015f2556154",
+    "hehe-report-presentation": "8e68b2b59cb016cda90eb97f008c721925ca2c2e2900f4257ca30aefdaff4fd4"
   },
   "license": "MIT"
 }

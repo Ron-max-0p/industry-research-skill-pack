@@ -4,14 +4,46 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-244C66.svg)](LICENSE)
 [![Agent Skills](https://img.shields.io/badge/Agent%20Skills-compatible-82B29B.svg)](https://agentskills.io/)
-[![Skills](https://img.shields.io/badge/Skills-14-B73F42.svg)](#包含的-skill)
-[![Release](https://img.shields.io/badge/release-2026.10.07--rc8-C98B5B.svg)](release-manifest.json)
+[![Skills](https://img.shields.io/badge/Skills-16-B73F42.svg)](#包含的-skill)
+[![Release](https://img.shields.io/badge/release-2026.10.25-C98B5B.svg)](release-manifest.json)
 
 **Hehe Industry Research Skill Pack** 面向使用公开信息开展行业研究、企业研究、商业尽调和投资研究的 AI Agent。它由 `hehe-industry-researcher` 管理项目，再按任务调用市场规模、产业链、商业模式、竞争格局、财务、估值等 13 个专项 Skill。
 
 “盒盒”是这套原创研究方法的识别前缀，因此公开版本统一使用 `hehe-*` 名称。每个专项都能独立调用；完整研究则由总入口负责开题、搜索组织、材料审核、专项验收和最终整合。
 
 ## Skill 更新说明
+
+### 2026-10-25：从研究定稿到专业报告，贯通文字与视觉交付
+
+> **把研究讲清楚，再把关系画清楚。** 新增两个可独立安装的报告 Skill，研究核心仍是总入口与13个专项。
+
+| 本轮升级 | 使用时的变化 |
+|---|---|
+| **专业润色与审校** | 写清对象、条件、因果与商业含义，处理含糊短句、重复解释和过度防御，保留完整分析与来源 |
+| **完整分页编排** | 需要演示时按完整主题组织页面，主标题说明对象，副标题说明本页判断；连续阅读报告保留原有叙事 |
+| **图形优先** | 制作前识别资金流、流程、分支、结构和数值关系，选用对应图式；生成器检查图形方案与实际页面对象 |
+| **多种交付形式** | 带侧栏目录的下拉HTML、16:9／9:16／A4翻页HTML、PDF及可编辑PPTX |
+| **独立安装与同源更新** | 两个报告Skill分别公开，也随组合包提供；安装相同名称的Skill只需保留一份 |
+
+已完成综合行业研究和独立商业模式专项的实际报告测试，检查了正文保留、图形表达、页面排版与PDF导出。本仓库提供方法、脚本和通用示例。
+
+独立仓库：[专业报告写作与润色](https://github.com/hexiaofeier/hehe-report-writing) · [商业报告呈现](https://github.com/hexiaofeier/hehe-report-presentation)。下方说明综合研究和单独专项的具体使用条件。
+
+### 2026-10-25：交付细节与发布校验补修
+
+移除未公开工具的路由提示；润色完成并复核后明确标为定稿，供后续呈现使用。HTML 自动隐藏不存在的 PDF 下载入口，PDF 导出核验成功后再补回链接。发布校验新增包外 Skill 引用检查，可选接口需在清单中说明用途。
+
+### 2026-10-24：可选写作与呈现增强
+
+研究核心保留总入口和13个专项，新增两个可独立使用的交付 Skill：
+
+- **专业文字：** 安装 `hehe-report-writing` 后，专项与综合报告默认润色；用户可明确跳过。输入原稿保留，正文、编号和分析附件的引用关系共同核对。没有安装时按原流程定稿。
+- **报告呈现：** 综合研究默认交付 HTML。没有 `hehe-report-presentation` 时使用原侧栏模板；只有呈现 Skill 时，直接从 Markdown 制作带目录的下拉 HTML；两个都装时主动介绍下拉版、16:9／9:16／A4翻页版和可编辑PPT，未选其他形式时交付默认下拉版。选择PPT时同时保留HTML阅读版。
+- **单独专项：** 保留原报告与必要附件；安装呈现 Skill 后主动询问是否增加视觉报告，用户选择制作才增加。没有写作 Skill 时提供下拉HTML；两者都有时提供全部形式。
+- **独立使用：** 两个交付 Skill 均可直接接收其他报告；自动接入范围是本仓库的1＋13，未把其他研究 Skill 改为自动调用。独立包与组合包从同一维护源导出，同名 Skill 只安装一份。
+
+依赖与替代路径见 [呈现依赖清单](skills/hehe-report-presentation/依赖清单.md)。缺少交付 Skill 不阻塞研究；生成环境不足时按可用路径完成HTML，并如实列出尚未制作的约定文件。
+
 
 ### 2026-10-07 · rc8：投资逻辑 × 估值分析联合升级
 
@@ -46,6 +78,7 @@
 </details>
 
 **已安装用户：** 更新 `skills/hehe-investment-logic/` 与 `skills/hehe-valuation-analysis/` 两个完整文件夹，包含 `references/` 和调用配置，然后新开会话。使用 Git 安装的用户可在仓库执行 `git pull --ff-only` 后重新复制这两个目录。
+
 
 ### 2026-09-28：竞争格局分析增加定位图与能力矩阵
 
@@ -122,12 +155,14 @@
 | 专项 | `hehe-governance-capital-allocation` | 控制权、治理、激励、资本来源用途和重大决策 | 资本配置底表 |
 | 专项 | `hehe-valuation-analysis` | 上市公司、非上市企业和商业尽调估值 | 公式 Excel |
 | 专项 | `hehe-investment-logic` | 投资方向、标的比较、交易路径、催化剂、风险和退出 | 投资路径结论表 |
+| 可选交付 | `hehe-report-writing` | 专业润色、审校、去AI味与完整分页编排 | Markdown定稿或逐页脚本 |
+| 可选交付 | `hehe-report-presentation` | 带侧栏下拉HTML、三种翻页画布、PDF与可编辑PPT | HTML、PDF、PPTX与可修改源文件 |
 
 ## 三种使用方式
 
 ### 1. 完整行业研究
 
-适合回答市场多大、结构怎样、谁在竞争、行业为什么变化、主要机会和风险是什么。完整安装全部 14 个 Skill，由总入口根据课题选择适用专项。
+适合回答市场多大、结构怎样、谁在竞争、行业为什么变化、主要机会和风险是什么。完整研究安装总入口和13个研究专项，由总入口根据课题选择适用专项；两个交付增强 Skill 可选。
 
 ### 2. 完整企业或行业＋企业研究
 
@@ -289,7 +324,7 @@ python scripts/build-html-report.py 主报告.md 主报告.html --report-type "�
 git clone https://github.com/hexiaofeier/hehe-industry-research-skill-pack.git
 ```
 
-完整研究建议复制 `skills/` 下全部 14 个文件夹。安装后的结构应是 `<Skill 目录>/<Skill 名>/SKILL.md`。
+本仓库包含16个 Skill 文件夹：总入口和13个研究专项组成研究核心，另附两个可选交付增强 Skill。可全部安装，也可只安装研究核心；单独专项只需安装对应文件夹。安装后的结构应是 `<Skill 目录>/<Skill 名>/SKILL.md`。
 
 | 客户端 | 常见用户级目录 | 显式调用示例 |
 |---|---|---|
@@ -346,7 +381,9 @@ hehe-industry-research-skill-pack/
     ├── hehe-financial-analysis/
     ├── hehe-governance-capital-allocation/
     ├── hehe-valuation-analysis/
-    └── hehe-investment-logic/
+    ├── hehe-investment-logic/
+    ├── hehe-report-writing/
+    └── hehe-report-presentation/
 ```
 
 ## 校验
@@ -357,7 +394,7 @@ hehe-industry-research-skill-pack/
 python scripts/validate_release.py
 ```
 
-它检查 14 个 Skill 的名称与目录、总入口组合合同、包内 Markdown 链接、交付模板结构、公开包清洁度以及本地路径和私有能力泄漏。校验通过说明发布包结构完整；具体研究质量仍需用实际课题检验。
+它分别检查总入口、13个研究专项及2个交付增强的名称、角色、运行文件、组合路径和 Markdown 链接；研究专项另查交付模板结构，所有包检查公开边界。两个交付 Skill 的独立导出使用同一校验器。校验通过说明发布包结构完整；具体研究质量仍需用实际课题检验。
 
 ## 公开边界与维护
 
